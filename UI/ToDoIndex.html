@@ -1,0 +1,21 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="ToDo.js"></script>
+</head>
+<body>
+    <h1>ToDo List</h1>
+    ToDo Event:<br />
+    <input type="text" id="ToDoEvent" placeholder="Enter your To-Do item"/>
+    <button onclick="post()">Add</button>
+    <button onclick="show()">Show</button>
+    <input type="text" id="ToDoId" placeholder="Enter the id">
+    <button onclick="getById()">GetById</button>
+    <h2>Update</h2>
+    <input type="text" id="ToDoIdU" placeholder="Enter the id">
+    <input type="text" id="ToDoEventU" placeholder="Enter your To-Do item"/>
+    <button onclick="update()">Update</button>
+    <p id="ListToDo"><ul></ul></p>
+</body>
+</html>
