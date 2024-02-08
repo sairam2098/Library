@@ -1,0 +1,77 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript">
+      function getById(){
+        var todoId = document.getElementById('ToDoId').value;
+        const url = 'http://localhost:3400/api/user/' + todoId ;
+        fetch(url)
+            .then(resp => resp.json())
+            .then((todosA)=>{
+                let list = "<table><tr><th>ISBN</th><th>TITLE</th><th>NAME</th><th>Availability </th></tr>"
+                todosA.forEach((todo)=> {
+                    list = list + "<tr><td>" + todo.Isbn +
+                       "</td>" + "<td>" + todo.Title + "</td>" + "<td>" + todo.Name + "</td>";
+                    if(todo.availability) {
+                      list = list + `<td><button type="submit" name="isbn" value="${todo.Isbn}">Checkout</button></td>`
+                    }else {
+                      list = list + "<td>Not Available</td>"
+                    }
+                    list = list + "</tr>"
+                })
+                list = list + "</table>";
+                document.getElementById("ListToDo").innerHTML = list;
+            }).catch(function(error){
+                console.log(console.error);
+            });
+      }
+    </script>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 60%;
+          text-align:center;
+          margin-left:auto;
+          margin-right:auto
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+
+        #search {
+          text-align:center;
+          margin-left:auto;
+          margin-right:auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="search">
+    <h1>Library</h1>
+    Books:<br />
+    <br>
+    <input type="text" id="ToDoId" placeholder="Enter the keyword">
+    <button onclick="getById()">search</button>
+    <br>
+    <br>
+    <form action="/checkin">
+      <button type="submit">CheckIn</button>
+    </form>
+    <form action="/fines">
+      <button type="submit">Fines</button>
+    </form>
+    </div>
+    <form action="/checkout">
+      <p id="ListToDo"><ul></ul></p>
+    </form>
+</body>
+</html>

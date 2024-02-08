@@ -1,16 +1,21 @@
 const { Sequelize } = require('sequelize');
+const bookSchema = require('./book.schema.js');
 const userSchema = require('./user.schema.js');
 
-const sequelize = new Sequelize('ToDo', 'sa', 'ezetc',{
+const sequelize = new Sequelize('Library', 'root', 'root',{
     host: 'localhost',
-    dialect: 'mssql',
+    dialect: 'mysql',
+    dialectOptions: {
+        supportBigNumbers: true
+    }
 });
 
 module.exports = {
     getModels: async () => {
         await sequelize.authenticate();
         return {
-            userModel: userSchema(sequelize),
+            bookModel: bookSchema(sequelize),
+            userModel: userSchema(sequelize)
         }
     }
 }

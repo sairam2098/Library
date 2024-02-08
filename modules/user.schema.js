@@ -1,23 +1,33 @@
 const { Sequelize } = require('sequelize');
 module.exports = (sequelize) => {
-    return sequelize.define('ToDoTable', {
-        id: {
+    return sequelize.define('Borrower', {
+        Card_id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        text: {
+        Ssn: {
+            type: Sequelize.BIGINT,
+            allowNull: false
+        },
+        Bname: {
             type: Sequelize.STRING,
             allowNull: false
         },
-        dateUpdate: {
-            type: Sequelize.DATE,
+        BPass: {
+            type: Sequelize.STRING,
+            allowNull: false
         },
-        isDeleted: {
-            type: Sequelize.INTEGER,
+        Address: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        Phone: {
+            type: Sequelize.STRING,
+            allowNull: false
         }
     }, {
-        tableName: 'ToDoTable',
+        tableName: 'BORROWER',
         timestamps: false
     });
 }

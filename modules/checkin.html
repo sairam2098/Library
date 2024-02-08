@@ -1,0 +1,64 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript">
+      function getCheckouts(){
+        const url = 'http://localhost:3400/loans' ;
+        fetch(url)
+            .then(resp => resp.json())
+            .then((todosA)=>{
+                console.log(todosA);
+                let list = "<table><tr><th>ISBN</th><th>TITLE</th><th>Availability </th></tr>"
+                todosA.forEach((todo)=> {
+                    list = list + "<tr><td>" + todo.isbn +
+                       "</td>" + "<td>" + todo.title + "</td>";
+                    list = list + `<td><button type="submit" name="book_id" value="${todo.book_id}">CheckIn</button></td>`
+                    list = list + "</tr>"
+                })
+                list = list + "</table>";
+                document.getElementById("CheckInBooks").innerHTML = list;
+            }).catch(function(error){
+                console.log(console.error);
+            });
+      }
+    </script>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 60%;
+          text-align:center;
+          margin-left:auto;
+          margin-right:auto
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+
+        #search {
+          text-align:center;
+          margin-left:auto;
+          margin-right:auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="search">
+    <h1>Library</h1>
+    Books:<br />
+    <br>
+    <button onclick="getCheckouts()">Get Checkouts</button>
+    </div>
+    <form action="/checkinbook">
+        <p id="CheckInBooks"><ul></ul></p>
+    </form>
+</body>
+</html>
